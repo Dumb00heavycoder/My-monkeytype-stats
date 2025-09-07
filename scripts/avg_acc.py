@@ -16,6 +16,14 @@ def avg_acc(df):
     else:
        print(f"The minimum accuraacy of dhruv in a test is {mini} which has been achived only {mini_time} time")
 
+    return {
+        'average': avg,
+        'maximum': maxi,
+        'max_count': maxi_time,
+        'minimum': mini,
+        'min_count': mini_time
+    }
+
 
 
 

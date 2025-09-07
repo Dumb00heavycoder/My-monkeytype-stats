@@ -19,3 +19,11 @@ def consistency(df):
 
    else:
         print(f"Minimum consistency: {mini}, achived {mini_time} time")
+
+   return {
+        'average': avg,
+        'maximum': maxi,
+        'max_count': maxi_time,
+        'minimum': mini,
+        'min_count': mini_time
+    }
