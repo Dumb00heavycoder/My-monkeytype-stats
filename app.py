@@ -1,4 +1,4 @@
-from flask import Flask. render_template
+from flask import Flask, render_template
 import sys
 import os
 import pandas as pd
@@ -62,13 +62,29 @@ def sample_stats():
 def getstats():
     if df is None or df.empty:
          return sample_stats()
+    try: 
+        return {
+                'wpm': average_wpm(df),
+                'accuracy':avg_acc(df),
+                'consistency':consistency(df),
+                'modes':modewise_wpm(df)
+                }
+    except Exception as e:
+        print(f"Error calculating stats: {e}")
+        return get_sample_stats()
 
      
 
 @app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+def index():
+    stats =  getstats()
+    user_info = {
+            'name': 'Dhruv',
+            'monkeytype_account': '@Dumboo'
+            }
+    return render_template('index.html', stats=stats, user=user_info)
 
-if __name__ == "main":
-    app.run(debug=True)
-
+if __name__ == '__main__':
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)
