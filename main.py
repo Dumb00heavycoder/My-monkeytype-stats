@@ -10,3 +10,4 @@ avg_acc(df)
 consistency(df)
 modewise_wpm(df)
 
+
